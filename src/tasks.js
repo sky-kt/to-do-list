@@ -1,17 +1,55 @@
-export let status = (() => {
-    let init = (notDone) => {
-        //add ability to change icon on click
-        document.querySelectorAll(".notDone").forEach(notDone => {
-            notDone.addEventListener("click", () => {
-                notDone.removeChild(notDone.childNodes[0])
-                notDone.removeChild(notDone.childNodes[0])
-                let done = document.createElement('i')
-                done.classList.add('fas', 'fa-check-circle')
-                notDone.prepend(done)
-                console.log('done')
-            })
+let tasks = (() => {
+    let taskList = []
+
+    let makeForm = () => {
+        let buttonContainer = document.getElementById('buttonContainer')
+        removeAllChildren(buttonContainer)
+
+        let buttonForm = document.createElement("form")
+        let buttonFormInput = document.createElement('input')
+        buttonFormInput.type = "text"
+        buttonFormInput.name = "taskName" 
+
+        buttonForm.appendChild(buttonFormInput)
+        buttonContainer.appendChild(buttonForm)
+
+        buttonForm.addEventListener('submit', () => {
+            makeButton(buttonFormInput.value)
         })
     }
 
-    return { init }
+    let makeButton = (input) => {
+        pushInput(input)
+
+        let buttonContainer = document.getElementById('buttonContainer')
+        removeAllChildren(buttonContainer)
+
+        let newTaskButton = document.createElement('div')
+        let newTaskButtonText = document.createTextNode("+ New Task")
+
+        newTaskButton.appendChild(newTaskButtonText)
+        newTaskButton.setAttribute('id', 'newTaskButton')
+        buttonContainer.appendChild(newTaskButton)
+
+        newTaskButton.addEventListener('click', makeForm)
+    }
+
+    let pushInput = (input) => {
+        console.log('gets here')
+        if(input !== undefined) {
+            taskList.push(input)
+            console.log(taskList)
+        } else return
+    }
+
+    let removeAllChildren = (parent) => {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
+    return { makeButton, makeForm }
+
 })()
+
+export { tasks }
