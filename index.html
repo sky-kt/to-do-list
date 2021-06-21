@@ -3,7 +3,6 @@
     <head>
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
 
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
@@ -11,8 +10,6 @@
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/regular.js"></script>
 
         <style>
-            @import url('../node_modules/font-awesome/css/font-awesome.min.css');
-
             html {
                 width: 100vw;
                 height: 100vh;
@@ -52,7 +49,7 @@
             }
 
             #projectTab {
-                background-color: #dfdfdd;
+                background-color: #dfdfdf;
                 min-width: 170px;
             }
 
@@ -94,6 +91,12 @@
                 margin: 0 0 0 10px;
             }
 
+            .fa-circle {
+            }
+
+            .fa-circle:hover {
+                cursor: pointer;
+            }
         </style>
         <title>To Do List</title>
     </head>
@@ -107,27 +110,39 @@
                 <div id="taskTab">
                     <h2 id="taskTabTitle">Tasks</h2>
                     <div id="taskContainer">
+                        <!-- task one -->
                         <div class="task">
                             <div class="taskStatus">
-                                <i class="fas fa-check-circle"></i>
+                                <!--idea is to remove the very first
+                                child and replace it with the check
+                                i tag.-->
+                                <div class="done">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
                                 <p class="taskText">Feed dog</p>
                             </div>
                             <div class="taskDate">
                                 <p>Date</p>
                             </div>
                         </div>
+                        <!-- task two-->
                         <div class="task">
                             <div class="taskStatus">
-                                <i class="far fa-circle"></i>
+                                <div class="notDone">
+                                    <i class="far fa-circle"></i>
+                                </div>
                                 <p class="taskText">Do dishes</p>
                             </div>
                             <div class="taskDate">
                                 <p>Date</p>
                             </div>
-                        </div>
+                        </div> 
+                        <!-- task three -->
                         <div class="task">
                             <div class="taskStatus">
-                                <i class="far fa-circle"></i>
+                                <div class="notDone">
+                                    <i class="far fa-circle"></i>
+                                </div>
                                 <p class="taskText">Clean room</p>
                             </div>
                             <div class="taskDate">
@@ -135,7 +150,7 @@
                             </div>
                         </div>
                     </div>
-
+                </div>
             </div>
         </div>
     </body>

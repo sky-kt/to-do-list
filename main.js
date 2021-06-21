@@ -1,0 +1,1 @@
+(()=>{"use strict";document.querySelectorAll(".notDone").forEach((e=>{e.addEventListener("click",(()=>{e.removeChild(e.childNodes[0]),e.removeChild(e.childNodes[0]);let c=document.createElement("i");c.classList.add("fas","fa-check-circle"),e.prepend(c),console.log("done")}))}))})();
