@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap" rel="stylesheet"> 
+        <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+
+        <script defer src="../node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
+        <script defer src="../node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
+        <script defer src="../node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
+        <script defer src="../node_modules/@fortawesome/fontawesome-free/js/regular.js"></script>
+
         <style>
+            @import url('../node_modules/font-awesome/css/font-awesome.min.css');
+
             html {
                 width: 100vw;
                 height: 100vh;
@@ -23,6 +34,8 @@
             h1 {
                 margin-left: 15px;
                 font-size: 25px;
+                font-family: 'Overpass Mono', monospace;
+                font-weight: bold;
             }
 
             #content {
@@ -46,6 +59,41 @@
             #taskTab {
                 background-color: aliceblue;
             }
+
+            #taskContainer {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+
+            #taskTabTitle {
+                width: 100%;
+                text-align: center;
+                font-family: 'Overpass Mono', monospace
+            }
+
+            .task {
+                width: 80%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid;
+                border-color: #cfcfcf;
+                font-family: 'Overpass Mono', monospace
+            }
+
+            .taskStatus {
+                display: flex;
+                flex-wrap: nowrap;
+                align-items: center;
+                width: 80%;
+            }
+
+            .taskText {
+                margin: 0 0 0 10px;
+            }
+
         </style>
         <title>To Do List</title>
     </head>
@@ -57,8 +105,37 @@
                 <div id="projectTab">
                 </div>
                 <div id="taskTab">
+                    <h2 id="taskTabTitle">Tasks</h2>
+                    <div id="taskContainer">
+                        <div class="task">
+                            <div class="taskStatus">
+                                <i class="fas fa-check-circle"></i>
+                                <p class="taskText">Feed dog</p>
+                            </div>
+                            <div class="taskDate">
+                                <p>Date</p>
+                            </div>
+                        </div>
+                        <div class="task">
+                            <div class="taskStatus">
+                                <i class="far fa-circle"></i>
+                                <p class="taskText">Do dishes</p>
+                            </div>
+                            <div class="taskDate">
+                                <p>Date</p>
+                            </div>
+                        </div>
+                        <div class="task">
+                            <div class="taskStatus">
+                                <i class="far fa-circle"></i>
+                                <p class="taskText">Clean room</p>
+                            </div>
+                            <div class="taskDate">
+                                <p>Date</p>
+                            </div>
+                        </div>
+                    </div>
 
-                </div>
             </div>
         </div>
     </body>
