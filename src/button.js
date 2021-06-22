@@ -44,7 +44,9 @@ let button = (() => {
     }
 
     let pushTask = (input) => {
-        tasks.create(input)
+        console.log(input)
+        tasks.construct(input)
+        tasks.load()
         status.init()
     }
 
