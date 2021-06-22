@@ -17,6 +17,8 @@ let button = (() => {
         buttonForm.appendChild(buttonFormInput)
         buttonContainer.appendChild(buttonForm)
 
+        buttonFormInput.focus()
+
         buttonForm.addEventListener('submit', () => {
             makeButton(buttonFormInput.value)
         })

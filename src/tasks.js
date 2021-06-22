@@ -8,9 +8,10 @@ let tasks = (() => {
     }
 
     let load = () => {
-        for(let indivTask in taskArray) {
-            let taskContainer = document.getElementById('taskContainer')
+        let taskContainer = document.getElementById('taskContainer')
+        removeAllChildren(taskContainer)
 
+        for(let indivTask in taskArray) {
             let task = document.createElement('div')
             task.classList.add('task')
 
