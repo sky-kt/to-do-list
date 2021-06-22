@@ -1,55 +1,43 @@
 let tasks = (() => {
-    let taskList = []
+    let create = (input) => {
+        let taskContainer = document.getElementById('taskContainer')
 
-    let makeForm = () => {
-        let buttonContainer = document.getElementById('buttonContainer')
-        removeAllChildren(buttonContainer)
+        let task = document.createElement('div')
+        task.classList.add('task')
 
-        let buttonForm = document.createElement("form")
-        let buttonFormInput = document.createElement('input')
-        buttonFormInput.type = "text"
-        buttonFormInput.name = "taskName" 
+        let taskStatus = document.createElement('div')
+        taskStatus.classList.add('taskStatus')
 
-        buttonForm.appendChild(buttonFormInput)
-        buttonContainer.appendChild(buttonForm)
+        let notDone = document.createElement('div')
+        notDone.classList.add('notDone')
 
-        buttonForm.addEventListener('submit', () => {
-            makeButton(buttonFormInput.value)
-        })
+        let icon = document.createElement('i')
+        icon.classList.add('far', 'fa-circle')
+
+        let taskText = document.createElement('p')
+        taskText.classList.add('taskText')
+        let taskTextNode = document.createTextNode(input)
+
+        let taskDate = document.createElement('div')
+        taskDate.classList.add('taskDate')
+        let taskDateText = document.createTextNode('Date')
+
+        //append children
+        taskDate.appendChild(taskDateText)
+        
+        notDone.prepend(icon)
+        taskText.appendChild(taskTextNode)
+
+        taskStatus.appendChild(notDone)
+        taskStatus.appendChild(taskText)
+
+        task.appendChild(taskStatus)
+        task.appendChild(taskDate)
+
+        taskContainer.appendChild(task)
     }
 
-    let makeButton = (input) => {
-        pushInput(input)
-
-        let buttonContainer = document.getElementById('buttonContainer')
-        removeAllChildren(buttonContainer)
-
-        let newTaskButton = document.createElement('div')
-        let newTaskButtonText = document.createTextNode("+ New Task")
-
-        newTaskButton.appendChild(newTaskButtonText)
-        newTaskButton.setAttribute('id', 'newTaskButton')
-        buttonContainer.appendChild(newTaskButton)
-
-        newTaskButton.addEventListener('click', makeForm)
-    }
-
-    let pushInput = (input) => {
-        console.log('gets here')
-        if(input !== undefined) {
-            taskList.push(input)
-            console.log(taskList)
-        } else return
-    }
-
-    let removeAllChildren = (parent) => {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-        }
-    }
-
-    return { makeButton, makeForm }
-
+    return { create }
 })()
 
 export { tasks }

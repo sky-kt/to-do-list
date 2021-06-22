@@ -1,5 +1,6 @@
-import { tasks } from "./tasks.js"
+import { button } from "./button.js"
 import { status } from "./status.js"
+import { tasks } from "./tasks.js"
 
 status.init()
-tasks.makeButton()
+button.makeButton()
