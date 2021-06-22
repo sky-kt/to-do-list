@@ -1,14 +1,17 @@
 let status = ((notDone) => {
     //add ability to change icon on click
     let init = () => {
-        document.querySelectorAll(".notDone").forEach(notDone => {
-            notDone.addEventListener("click", () => {
-                removeAllChildren(notDone)
-                let done = document.createElement('i')
-                done.classList.add('fas', 'fa-check-circle')
-                notDone.prepend(done)
-                console.log('done')
-            })
+        let notDone = document.querySelectorAll(".notDone")
+        console.log(notDone)
+        let lastNotDone = notDone[notDone.length - 1]
+        console.log(`lastnotdone: ${lastNotDone}`)
+
+        lastNotDone.addEventListener("click", () => {
+            removeAllChildren(lastNotDone)
+            let done = document.createElement('i')
+            done.classList.add('fas', 'fa-check-circle')
+            lastNotDone.prepend(done)
+            console.log('done')
         })
     }
 

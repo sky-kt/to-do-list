@@ -2,14 +2,15 @@ import { tasks } from "./tasks.js"
 import { status } from "./status.js"
 
 let button = (() => {
-    let taskList = []
-
     let makeForm = () => {
         let buttonContainer = document.getElementById('buttonContainer')
         removeAllChildren(buttonContainer)
 
         let buttonForm = document.createElement("form")
+        buttonForm.setAttribute('id', 'buttonForm')
+
         let buttonFormInput = document.createElement('input')
+        buttonFormInput.setAttribute('id', 'buttonFormInput')
         buttonFormInput.type = "text"
         buttonFormInput.name = "taskName" 
 
@@ -22,7 +23,12 @@ let button = (() => {
     }
 
     let makeButton = (input) => {
-        pushTask(input)
+        console.log(`input:${input}`)
+
+        if(input != undefined) {
+            console.log('can push')
+            pushTask(input)
+        }
 
         let buttonContainer = document.getElementById('buttonContainer')
         removeAllChildren(buttonContainer)
@@ -38,10 +44,8 @@ let button = (() => {
     }
 
     let pushTask = (input) => {
-        if(input !== undefined) {
-            tasks.create(input)
-            status.init()
-        } else return
+        tasks.create(input)
+        status.init()
     }
 
     let removeAllChildren = (parent) => {
