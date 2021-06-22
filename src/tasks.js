@@ -14,16 +14,26 @@ let tasks = (() => {
         let icon = document.createElement('i')
         icon.classList.add('far', 'fa-circle')
 
+        console.log(icon)
+
         let taskText = document.createElement('p')
         taskText.classList.add('taskText')
         let taskTextNode = document.createTextNode(input)
 
         let taskDate = document.createElement('div')
         taskDate.classList.add('taskDate')
-        let taskDateText = document.createTextNode('Date')
+
+        let dateLabel = document.createElement('label')
+        dateLabel.for = "dueDate"
+
+        let dateInput = document.createElement('input')
+        dateInput.type = "date"
+        dateInput.class = "dueDate"
+        dateInput.name = "dueDate"
 
         //append children
-        taskDate.appendChild(taskDateText)
+        taskDate.appendChild(dateLabel)
+        taskDate.appendChild(dateInput)
         
         notDone.prepend(icon)
         taskText.appendChild(taskTextNode)
@@ -36,7 +46,6 @@ let tasks = (() => {
 
         taskContainer.appendChild(task)
     }
-
     return { create }
 })()
 
