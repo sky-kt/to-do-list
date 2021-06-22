@@ -17,8 +17,6 @@ let status = ((notDone) => {
             let taskToDelete = lastNotDone.parentNode.parentNode
             taskToDelete.classList.add('fadingTask')
 
-
-
             setTimeout(() => {
                 taskContainer.removeChild(lastNotDone.parentNode.parentNode)
             }, 500)

@@ -1,4 +1,48 @@
 let tasks = (() => {
+    let taskArray = []
+
+    let construct = (input) => {
+        taskArray.push(input)
+    }
+
+    let removeAllChildren = (parent) => {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+    }
+
+    let makeEditable = (taskTextContainer) => {
+        let taskText = taskTextContainer.firstChild
+        taskText.addEventListener("click", () => {
+            taskText.remove()
+            //add form
+
+            let newTextForm = document.createElement('form')
+            newTextForm.classList.add('newTextForm')
+
+            let newTextInput = document.createElement('input')
+
+            newTextInput.type = "text"
+            newTextInput.name = "newTaskName" 
+            newTextInput.classList.add('newTextInput')
+
+            newTextForm.appendChild(newTextInput)
+
+            newTextForm.addEventListener("submit", () => {
+                removeAllChildren(taskTextContainer)
+                let newTaskText = document.createElement('p')
+                newTaskText.classList.add('taskText')
+                let newTaskTextNode = document.createTextNode(newTextInput.value)
+                newTaskText.appendChild(newTaskTextNode)
+                taskTextContainer.appendChild(newTaskText)
+                makeEditable(taskTextContainer)
+            })
+
+            taskTextContainer.appendChild(newTextForm)
+        })
+        
+    }
+
     let create = (input) => {
         let taskContainer = document.getElementById('taskContainer')
 
@@ -16,6 +60,9 @@ let tasks = (() => {
 
         console.log(icon)
 
+        let taskTextContainer = document.createElement('div')
+        taskTextContainer.classList.add('taskTextContainer')
+
         let taskText = document.createElement('p')
         taskText.classList.add('taskText')
         let taskTextNode = document.createTextNode(input)
@@ -32,21 +79,24 @@ let tasks = (() => {
         dateInput.name = "dueDate"
 
         //append children
+        console.log('appending?')
         taskDate.appendChild(dateLabel)
         taskDate.appendChild(dateInput)
         
         notDone.prepend(icon)
         taskText.appendChild(taskTextNode)
+        taskTextContainer.appendChild(taskText)
+        makeEditable(taskTextContainer)
 
         taskStatus.appendChild(notDone)
-        taskStatus.appendChild(taskText)
+        taskStatus.appendChild(taskTextContainer)
 
         task.appendChild(taskStatus)
         task.appendChild(taskDate)
 
         taskContainer.appendChild(task)
     }
-    return { create }
+    return { create, construct }
 })()
 
 export { tasks }
