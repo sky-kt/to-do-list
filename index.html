@@ -57,6 +57,12 @@
                 background-color: aliceblue;
             }
 
+            #taskTabTitle {
+                width: 100%;
+                text-align: center;
+                font-family: 'Overpass Mono', monospace
+            }
+
             #taskContainer {
                 display: flex;
                 flex-wrap: wrap;
@@ -64,15 +70,11 @@
                 text-align: center;
             }
 
-            #taskTabTitle {
-                width: 100%;
-                text-align: center;
-                font-family: 'Overpass Mono', monospace
-            }
-
             .task {
                 width: 80%;
                 display: flex;
+                flex-wrap: wrap;
+                height: auto;
                 justify-content: space-between;
                 align-items: center;
                 border-bottom: 1px solid;
@@ -111,10 +113,31 @@
                 justify-content: center;
                 align-items: center;
                 font-family: 'Overpass Mono', monospace;
-                margin-top: 5px;
+                margin-top: 10px;
+                background-color: #dfdfdf;
+                border-radius: 10px;
             }
 
+            #buttonForm {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
 
+            #buttonFormInput {
+                width: 60%;
+                height: 30px;
+                font-family: 'Overpass Mono', monospace;
+                background-color: #dfdfdf;
+                text-align: center;
+                border-radius: 10px;
+                border: 0;
+            }
+
+            input:focus, textarea:focus, select:focus{
+                outline: none;
+            }
         </style>
         <title>To Do List</title>
     </head>
@@ -128,12 +151,9 @@
                 <div id="taskTab">
                     <h2 id="taskTabTitle">Tasks</h2>
                     <div id="taskContainer">
-                        <!-- task one -->
+                        <!--
                         <div class="task">
                             <div class="taskStatus">
-                                <!--idea is to remove the very first
-                                child and replace it with the check
-                                i tag.-->
                                 <div class="done">
                                     <i class="fas fa-check-circle"></i>
                                 </div>
@@ -141,7 +161,6 @@
                             </div>
                             <div class="taskDate">Date</div>
                         </div>
-                        <!-- task two-->
                         <div class="task">
                             <div class="taskStatus">
                                 <div class="notDone">
@@ -151,16 +170,7 @@
                             </div>
                             <div class="taskDate">Date</div>
                         </div> 
-                        <!-- task three -->
-                        <div class="task">
-                            <div class="taskStatus">
-                                <div class="notDone">
-                                    <i class="far fa-circle"></i>
-                                </div>
-                                <p class="taskText">Clean room</p>
-                            </div>
-                            <div class="taskDate">Date</div>
-                        </div>
+                        -->
                     </div>
                     <div id="buttonContainer">
                     </div>
