@@ -41,6 +41,28 @@ h1 {
     min-width: 170px;
 }
 
+#projectTabTitle{
+    width: 100%;
+    text-align: center;
+    font-family: 'Overpass Mono', monospace;
+}
+
+#projectContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.project {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Overpass Mono', monospace;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 #taskTab {
     background-color: aliceblue;
 }

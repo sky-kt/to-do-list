@@ -2,9 +2,8 @@ let tasks = (() => {
     let taskArray = []
 
     let construct = (input) => {
-        console.log(input)
-        taskArray.push(input)
-        console.log(input)
+        taskArray.push([input])
+        console.log(taskArray)
     }
 
     let load = () => {
@@ -24,16 +23,14 @@ let tasks = (() => {
             let icon = document.createElement('i')
             icon.classList.add('far', 'fa-circle')
 
-            console.log(icon)
-
             let taskTextContainer = document.createElement('div')
             taskTextContainer.classList.add('taskTextContainer')
 
             let taskText = document.createElement('p')
             taskText.classList.add('taskText')
-            let taskTextNode = document.createTextNode(taskArray[indivTask])
+            let taskTextNode = document.createTextNode(taskArray[indivTask][0])
 
-            let taskDate = document.createElement('div')
+            let taskDate = document.createElement('form')
             taskDate.classList.add('taskDate')
 
             let dateLabel = document.createElement('label')
@@ -44,8 +41,17 @@ let tasks = (() => {
             dateInput.class = "dueDate"
             dateInput.name = "dueDate"
 
-            //append children
-            console.log('appending?')
+            if(taskArray[indivTask][1]) {
+                dateInput.value = taskArray[indivTask][1]
+            }
+
+            dateInput.addEventListener("change", () => {
+                let inputtedDate = dateInput.value
+                taskArray[indivTask].push(inputtedDate)
+            })
+
+            //append
+
             taskDate.appendChild(dateLabel)
             taskDate.appendChild(dateInput)
         
