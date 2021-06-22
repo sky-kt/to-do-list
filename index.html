@@ -79,25 +79,47 @@
                 align-items: center;
                 border-bottom: 1px solid;
                 border-color: #cfcfcf;
-                font-family: 'Overpass Mono', monospace
+                font-family: 'Overpass Mono', monospace;
+                padding-bottom: 10px;
+            }
+            
+            .fadingTask {
+                animation: fadeAnimation 0.5s forwards;
+            }
+
+            @keyframes fadeAnimation {
+                0% {
+                    opacity: 100%;
+                }
+                100% {
+                    opacity: 0%;
+                }
             }
 
             .taskStatus {
                 display: flex;
                 flex-wrap: nowrap;
                 align-items: center;
-                width: 80%;
             }
 
             .taskText {
-                margin: 0 0 0 10px;
-            }
-
-            .fa-circle {
+                margin: 0 0 0 20px;
             }
 
             .fa-circle:hover {
                 cursor: pointer;
+            }
+
+
+            .notDone {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            } 
+
+            .taskDate {
+                display: flex;
+                justify-content: flex-end;
             }
 
             #buttonContainer {
@@ -118,6 +140,10 @@
                 border-radius: 10px;
             }
 
+            #newTaskButton:hover {
+                cursor: pointer;
+            }
+
             #buttonForm {
                 display: flex;
                 justify-content: center;
@@ -134,10 +160,6 @@
                 border-radius: 10px;
                 border: 0;
             }
-
-            input:focus, textarea:focus, select:focus{
-                outline: none;
-            }
         </style>
         <title>To Do List</title>
     </head>
@@ -151,8 +173,7 @@
                 <div id="taskTab">
                     <h2 id="taskTabTitle">Tasks</h2>
                     <div id="taskContainer">
-                        <!--
-                        <div class="task">
+                        <!-- <div class="task">
                             <div class="taskStatus">
                                 <div class="done">
                                     <i class="fas fa-check-circle"></i>
@@ -160,17 +181,19 @@
                                 <p class="taskText">Feed dog</p>
                             </div>
                             <div class="taskDate">Date</div>
-                        </div>
-                        <div class="task">
+                        </div> -->
+                        <!-- <div class="task">
                             <div class="taskStatus">
                                 <div class="notDone">
                                     <i class="far fa-circle"></i>
                                 </div>
                                 <p class="taskText">Do dishes</p>
                             </div>
-                            <div class="taskDate">Date</div>
-                        </div> 
-                        -->
+                            <div class="taskDate">
+                                <label for="dueDate"><label>
+                                <input type="date" class="dueDate" name="duedate"> 
+                            </div>
+                        </div>  -->
                     </div>
                     <div id="buttonContainer">
                     </div>
