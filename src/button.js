@@ -13,13 +13,25 @@ let button = (() => {
         buttonFormInput.setAttribute('id', 'buttonFormInput')
         buttonFormInput.type = "text"
         buttonFormInput.name = "taskName" 
-        buttonFormInput.focus()
 
         buttonForm.appendChild(buttonFormInput)
         buttonContainer.appendChild(buttonForm)
+
+        buttonFormInput.focus()
+
+        buttonForm.addEventListener('submit', () => {
+            makeButton(buttonFormInput.value)
+        })
     }
 
-    let makeButton = () => {
+    let makeButton = (input) => {
+        console.log(`input:${input}`)
+
+        if(input != undefined) {
+            console.log('can push')
+            pushTask(input)
+        }
+
         let buttonContainer = document.getElementById('buttonContainer')
         removeAllChildren(buttonContainer)
 
@@ -29,6 +41,15 @@ let button = (() => {
         newTaskButton.appendChild(newTaskButtonText)
         newTaskButton.setAttribute('id', 'newTaskButton')
         buttonContainer.appendChild(newTaskButton)
+
+        newTaskButton.addEventListener('click', makeForm)
+    }
+
+    let pushTask = (input) => {
+        console.log(input)
+        tasks.construct(input)
+        tasks.load()
+        status.init()
     }
 
     let removeAllChildren = (parent) => {
