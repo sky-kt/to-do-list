@@ -1,4 +1,6 @@
-let status = ((notDone) => {
+import { taskFunctions } from "./taskFunctions.js"
+
+let status = (() => {
     //add ability to change icon on click
     let init = () => {
         document.querySelectorAll(".notDone").forEach(currentNotDone => {
@@ -9,6 +11,7 @@ let status = ((notDone) => {
                 currentNotDone.prepend(done)
 
                 let taskToDelete = currentNotDone.parentNode.parentNode
+                taskFunctions.taskArray.splice(Array.from(taskToDelete.parentNode.children).indexOf(taskToDelete), 1)
                 taskToDelete.classList.add('fadingTask')
 
                 setTimeout(() => {

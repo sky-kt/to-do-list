@@ -1,71 +1,101 @@
-let tasks = (() => {
+import { tasksToLoad } from "./index.js"
+let taskFunctions = (() => {
     let taskArray = []
 
-    let construct = (input) => {
-        taskArray.push([input])
-        console.log(taskArray)
+    let findDate = () => {
+        let today = new Date().toLocaleDateString()
+        let todayArray = today.split('/')
+
+        let month = todayArray[0]
+        let day = todayArray[1]
+        month = month.padStart(3, '0').slice(-2)
+        day = day.padStart(3, '0').slice(-2)
+        todayArray[0] = todayArray[2] 
+        todayArray[1] = month 
+        todayArray[2] = day 
+        today = todayArray.join('-')
+        return today
     }
 
-    let load = () => {
+    let construct = (input) => {
+        if(tasksToLoad === "today") { 
+            console.log(findDate())
+            taskArray.push([input, findDate()]) 
+            console.log('pushed?')
+        }
+        else { taskArray.push([input]) }
+        console.log('task array is', taskArray)
+    }
+
+    let loadInbox = () => {
+        load(taskArray)
+    }
+
+    let loadToday = () => {
+        console.log('AHHHH')
+        //loop over all items in task array, checking if it has a second value
+        //if it does, check the date- should be the same
+        let desiredTasks = []
+        
+        let today = findDate() 
+
+        for(let task in taskArray) {
+            if(taskArray[task][1] === today) {
+                desiredTasks.push(taskArray[task])
+            }
+        }
+
+        console.log(desiredTasks)
+        load(desiredTasks)
+    }
+
+    let load = (activeTasks) => {
+        console.log(`tasksToLoad: ${tasksToLoad}`)
         let taskContainer = document.getElementById('taskContainer')
         removeAllChildren(taskContainer)
 
-        for(let indivTask in taskArray) {
+        for(let indivTask in activeTasks) {
+            console.log(`tasksToLoad: ${tasksToLoad}`)
             let task = document.createElement('div')
             task.classList.add('task')
-
             let taskStatus = document.createElement('div')
             taskStatus.classList.add('taskStatus')
-
             let notDone = document.createElement('div')
             notDone.classList.add('notDone')
-
             let icon = document.createElement('i')
             icon.classList.add('far', 'fa-circle')
-
             let taskTextContainer = document.createElement('div')
             taskTextContainer.classList.add('taskTextContainer')
-
             let taskText = document.createElement('p')
             taskText.classList.add('taskText')
-            let taskTextNode = document.createTextNode(taskArray[indivTask][0])
-
+            let taskTextNode = document.createTextNode(activeTasks[indivTask][0])
             let taskDate = document.createElement('form')
             taskDate.classList.add('taskDate')
-
             let dateLabel = document.createElement('label')
             dateLabel.for = "dueDate"
-
             let dateInput = document.createElement('input')
             dateInput.type = "date"
             dateInput.class = "dueDate"
             dateInput.name = "dueDate"
 
-            if(taskArray[indivTask][1]) {
-                dateInput.value = taskArray[indivTask][1]
+            if(activeTasks[indivTask][1]) {
+                dateInput.value = activeTasks[indivTask][1]
             }
 
             dateInput.addEventListener("change", () => {
                 let inputtedDate = dateInput.value
-                taskArray[indivTask].push(inputtedDate)
+                activeTasks[indivTask].push(inputtedDate)
             })
-
-            //append
-
             taskDate.appendChild(dateLabel)
             taskDate.appendChild(dateInput)
-        
             notDone.prepend(icon)
             taskText.appendChild(taskTextNode)
             taskTextContainer.appendChild(taskText)
             makeEditable(taskTextContainer)
-
             taskStatus.appendChild(notDone)
             taskStatus.appendChild(taskTextContainer)
-
             task.appendChild(taskStatus)
             task.appendChild(taskDate)
-
             taskContainer.appendChild(task)
         }
     }
@@ -106,7 +136,7 @@ let tasks = (() => {
             parent.removeChild(parent.firstChild);
         }
     }
-    return { load, construct }
+    return { loadInbox, loadToday, construct, taskArray}
 })()
 
-export { tasks }
+export { taskFunctions }

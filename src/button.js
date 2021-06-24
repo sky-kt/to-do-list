@@ -1,6 +1,3 @@
-import { tasks } from "./tasks.js"
-import { status } from "./status.js"
-
 let button = (() => {
     let makeForm = () => {
         let buttonContainer = document.getElementById('buttonContainer')
@@ -13,10 +10,10 @@ let button = (() => {
         buttonFormInput.setAttribute('id', 'buttonFormInput')
         buttonFormInput.type = "text"
         buttonFormInput.name = "taskName" 
-        buttonFormInput.focus()
 
         buttonForm.appendChild(buttonFormInput)
         buttonContainer.appendChild(buttonForm)
+        buttonFormInput.focus()
     }
 
     let makeButton = () => {

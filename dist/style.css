@@ -52,7 +52,24 @@ h1 {
     flex-wrap: wrap;
 }
 
+#specialContainer{
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid;
+}
+
 .project {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Overpass Mono', monospace;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.special{
     width: 100%;
     display: flex;
     justify-content: center;
