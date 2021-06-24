@@ -1,6 +1,16 @@
 import { tasksToLoad } from "./index.js"
+import { weekNumber } from 'weeknumber'
+
 let taskFunctions = (() => {
     let taskArray = []
+
+    let construct = (input) => {
+        if(tasksToLoad === "today") { 
+            taskArray.push([input, findDate()]) 
+        }
+        else { taskArray.push([input]) }
+        console.log('task array is', taskArray)
+    }
 
     let findDate = () => {
         let today = new Date().toLocaleDateString()
@@ -17,14 +27,28 @@ let taskFunctions = (() => {
         return today
     }
 
-    let construct = (input) => {
-        if(tasksToLoad === "today") { 
-            console.log(findDate())
-            taskArray.push([input, findDate()]) 
-            console.log('pushed?')
+    let findWeek = (year, month, days) => {
+        let totalDays = 0
+        let isLeapYear
+
+        if(year % 400 === 0) isLeapYear = true
+        else if(year % 100 === 0) isLeapYear = false
+        else if(year % 4 === 0) isLeapYear = true
+        else isLeapYear = false
+
+        console.log('is leap year:', isLeapYear)
+        
+        for(let i = 1; i < month; i++) {
+            if(i % 2 !== 0) totalDays += 31
+            else if(i === 2) {
+                if(isLeapYear) totalDays += 29
+                else totalDays += 28
+            }
+            else totalDays += 30
         }
-        else { taskArray.push([input]) }
-        console.log('task array is', taskArray)
+
+        totalDays += days
+        return(Math.ceil((totalDays)/ 7))
     }
 
     let loadInbox = () => {
@@ -32,16 +56,35 @@ let taskFunctions = (() => {
     }
 
     let loadToday = () => {
-        console.log('AHHHH')
-        //loop over all items in task array, checking if it has a second value
-        //if it does, check the date- should be the same
         let desiredTasks = []
-        
         let today = findDate() 
 
         for(let task in taskArray) {
-            if(taskArray[task][1] === today) {
+            console.log('under')
+            if(taskArray[task].length > 1 && taskArray[task][1] === today) {
                 desiredTasks.push(taskArray[task])
+            }
+        }
+        console.log(desiredTasks)
+        load(desiredTasks)
+    }
+
+    let loadWeek = () => { 
+        let currentWeekNumber = weekNumber(new Date())
+        let desiredTasks = []
+        
+        for(let task in taskArray) {
+            if(taskArray[task][1]) {
+                let today = taskArray[task][1]
+                let splitTimeArray = today.split('-')
+
+                let year = parseInt(splitTimeArray[0])
+                let month = parseInt(splitTimeArray[1])
+                let days = parseInt(splitTimeArray[2])
+
+                if(findWeek(year, month, days) === currentWeekNumber) {
+                    desiredTasks.push(taskArray[task])
+                }
             }
         }
 
@@ -137,7 +180,7 @@ let taskFunctions = (() => {
             parent.removeChild(parent.firstChild);
         }
     }
-    return { loadInbox, loadToday, construct, taskArray}
+    return { loadInbox, loadToday, loadWeek, construct, taskArray}
 })()
 
 export { taskFunctions }
