@@ -75,17 +75,18 @@ let taskFunctions = (() => {
             dateLabel.for = "dueDate"
             let dateInput = document.createElement('input')
             dateInput.type = "date"
-            dateInput.class = "dueDate"
+            dateInput.classList.add("dueDate")
             dateInput.name = "dueDate"
 
             if(activeTasks[indivTask][1]) {
                 dateInput.value = activeTasks[indivTask][1]
             }
 
-            dateInput.addEventListener("change", () => {
-                let inputtedDate = dateInput.value
-                activeTasks[indivTask].push(inputtedDate)
-            })
+            // dateInput.addEventListener("change", () => {
+            //     let inputtedDate = dateInput.value
+            //     taskArray[indivTask].push(inputtedDate)
+            // })
+
             taskDate.appendChild(dateLabel)
             taskDate.appendChild(dateInput)
             notDone.prepend(icon)
