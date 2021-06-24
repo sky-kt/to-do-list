@@ -1,6 +1,3 @@
-import { tasks } from "./tasks.js"
-import { status } from "./status.js"
-
 let button = (() => {
     let makeForm = () => {
         let buttonContainer = document.getElementById('buttonContainer')
@@ -16,12 +13,7 @@ let button = (() => {
 
         buttonForm.appendChild(buttonFormInput)
         buttonContainer.appendChild(buttonForm)
-
         buttonFormInput.focus()
-
-        buttonForm.addEventListener('submit', () => {
-            makeButton(buttonFormInput.value)
-        })
     }
 
     let makeButton = (input) => {
