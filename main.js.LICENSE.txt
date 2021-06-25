@@ -1,5 +1,0 @@
-/*!
- * weeknumber
- * @author commenthol
- * @license Unlicense
- */
