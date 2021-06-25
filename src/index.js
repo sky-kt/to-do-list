@@ -6,6 +6,11 @@ import { date } from "./date"
 let tasksToLoad = "inbox";
 export { tasksToLoad }
 
+Date.prototype.getWeek = function () {
+    var onejan = new Date(this.getFullYear(), 0, 1);
+    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+};
+
 let activateButton = () => {
     let newTaskButton = document.getElementById('newTaskButton')
     newTaskButton.addEventListener('click', () => {

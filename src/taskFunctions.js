@@ -1,5 +1,4 @@
 import { tasksToLoad } from "./index.js"
-import { weekNumber } from 'weeknumber'
 
 let taskFunctions = (() => {
     let taskArray = []
@@ -27,30 +26,6 @@ let taskFunctions = (() => {
         return today
     }
 
-    let findWeek = (year, month, days) => {
-        let totalDays = 0
-        let isLeapYear
-
-        if(year % 400 === 0) isLeapYear = true
-        else if(year % 100 === 0) isLeapYear = false
-        else if(year % 4 === 0) isLeapYear = true
-        else isLeapYear = false
-
-        console.log('is leap year:', isLeapYear)
-        
-        for(let i = 1; i < month; i++) {
-            if(i % 2 !== 0) totalDays += 31
-            else if(i === 2) {
-                if(isLeapYear) totalDays += 29
-                else totalDays += 28
-            }
-            else totalDays += 30
-        }
-
-        totalDays += days
-        return(Math.ceil((totalDays)/ 7))
-    }
-
     let loadInbox = () => {
         load(taskArray)
     }
@@ -70,25 +45,16 @@ let taskFunctions = (() => {
     }
 
     let loadWeek = () => { 
-        let currentWeekNumber = weekNumber(new Date())
         let desiredTasks = []
-        
         for(let task in taskArray) {
             if(taskArray[task][1]) {
-                let today = taskArray[task][1]
-                let splitTimeArray = today.split('-')
-
-                let year = parseInt(splitTimeArray[0])
-                let month = parseInt(splitTimeArray[1])
-                let days = parseInt(splitTimeArray[2])
-
-                if(findWeek(year, month, days) === currentWeekNumber) {
+                let myDate = new Date(taskArray[task][1])
+                if (myDate.getWeek() === (new Date()).getWeek()) {
+                    console.log('same week')
                     desiredTasks.push(taskArray[task])
                 }
             }
         }
-
-        console.log(desiredTasks)
         load(desiredTasks)
     }
 
