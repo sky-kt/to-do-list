@@ -4,7 +4,7 @@ let taskFunctions = (() => {
     let taskArray = []
 
     let construct = (input) => {
-        if(tasksToLoad === "today") { 
+        if(tasksToLoad === "today" || tasksToLoad === "week") { 
             taskArray.push([input, findDate()]) 
         }
         else { taskArray.push([input]) }
@@ -59,12 +59,10 @@ let taskFunctions = (() => {
     }
 
     let load = (activeTasks) => {
-        console.log(`tasksToLoad: ${tasksToLoad}`)
         let taskContainer = document.getElementById('taskContainer')
         removeAllChildren(taskContainer)
 
         for(let indivTask in activeTasks) {
-            console.log(`tasksToLoad: ${tasksToLoad}`)
             let task = document.createElement('div')
             task.classList.add('task')
             let taskStatus = document.createElement('div')
@@ -91,11 +89,6 @@ let taskFunctions = (() => {
                 dateInput.value = activeTasks[indivTask][1]
             }
 
-            // dateInput.addEventListener("change", () => {
-            //     let inputtedDate = dateInput.value
-            //     taskArray[indivTask].push(inputtedDate)
-            // })
-
             taskDate.appendChild(dateLabel)
             taskDate.appendChild(dateInput)
             notDone.prepend(icon)
@@ -109,10 +102,10 @@ let taskFunctions = (() => {
             taskContainer.appendChild(task)
         }
     }
-    
 
     let makeEditable = (taskTextContainer) => {
         let taskText = taskTextContainer.firstChild
+        let taskTextContent = taskText.textContent
         taskText.addEventListener("click", () => {
             taskText.remove()
             //add form
@@ -127,8 +120,15 @@ let taskFunctions = (() => {
             newTextInput.classList.add('newTextInput')
 
             newTextForm.appendChild(newTextInput)
+            taskTextContainer.appendChild(newTextForm)
 
             newTextForm.addEventListener("submit", () => {
+
+                let taskToChange = taskTextContainer.parentNode.parentNode
+                let desiredIndex = Array.from(taskToChange.parentNode.children).indexOf(taskToChange)
+                taskArray[desiredIndex].shift()
+                taskArray[desiredIndex].unshift(newTextInput.value)
+
                 removeAllChildren(taskTextContainer)
                 let newTaskText = document.createElement('p')
                 newTaskText.classList.add('taskText')
@@ -137,7 +137,17 @@ let taskFunctions = (() => {
                 taskTextContainer.appendChild(newTaskText)
                 makeEditable(taskTextContainer)
             })
-            taskTextContainer.appendChild(newTextForm)
+            newTextForm.addEventListener("focusout", () => {
+                removeAllChildren(taskTextContainer)
+                let newTaskText = document.createElement('p')
+                newTaskText.classList.add('taskText')
+                let newTaskTextNode = document.createTextNode(taskTextContent)
+                newTaskText.appendChild(newTaskTextNode)
+                taskTextContainer.appendChild(newTaskText)
+                makeEditable(taskTextContainer)
+            })
+            // newTextForm.focus()
+            newTextInput.focus()
         })
     }
     

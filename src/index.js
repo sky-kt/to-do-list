@@ -28,7 +28,10 @@ let activateForm = () => {
         loadCorrectTasks()
         status.init()
         date.init()
-        //restart process again
+        button.makeButton()
+        activateButton()
+    })
+    buttonForm.addEventListener('focusout', () => {
         button.makeButton()
         activateButton()
     })

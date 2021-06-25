@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="style.css">
 
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
@@ -15,19 +13,30 @@
 
     <body>
         <div id="content">
-            <header><h1>To Do List</h1></header>
+            <header>
+                <i class="fas fa-list" id="listIcon"></i>
+                <h1>To Do List</h1>
+            </header>
             <div id="tabs">
                 <div id="projectTab">
-                    <h2 id="projectTabTitle">Projects</h2>
                     <div id="specialContainer">
-                        <div class="special" id="inbox">Inbox</div>
-                        <div class="special" id="today">Today</div>
-                        <div class="special" id="week">This Week</div>
+                        <div class="special" id="inbox">
+                            <i class="fas fa-inbox specialIcon"></i>
+                            <p>Inbox</p>
+                        </div>
+                        <div class="special" id="today">
+                            <i class="fas fa-calendar-day specialIcon"></i>
+                            <p>Today</p>
+                        </div>
+                        <div class="special" id="week">
+                            <i class="fas fa-calendar-week specialIcon"></i>
+                            <p>This Week</p>
+                        </div>
                     </div>
                     <div id="projectContainer">
-                        <div class="project">Work</div>
+                        <!-- <div class="project">Work</div>
                         <div class="project">School</div>
-                        <div class="project">Chores</div>
+                        <div class="project">Chores</div> -->
                     </div>
                 </div>
                 <div id="taskTab">
