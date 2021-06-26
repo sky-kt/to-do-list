@@ -48,31 +48,19 @@ h1 {
     min-width: 170px;
 }
 
-#projectTabTitle{
+#specialSectionTitle {
+    margin-top: 20px;
+    margin-bottom: 0px;
     width: 100%;
-    text-align: center;
     font-family: 'Overpass Mono', monospace;
+    font-size: 23px;
+    padding-left: 10px;
+    font-weight: bold;
 }
 
-#projectContainer {
+#specialSection {
     display: flex;
     flex-wrap: wrap;
-}
-
-#specialContainer{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.project {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Overpass Mono', monospace;
-    font-size: 18px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 }
 
 .special {
@@ -85,16 +73,92 @@ h1 {
     transition: font-size 0.5s, background-color 0.5s;
 }
 
+.special:hover {
+    background-color: rgb(201, 201, 201);
+    font-size: 21px;
+    cursor: pointer;
+}
+
 .specialIcon {
     margin-right: 10px;
     margin-left: 10px;
     height: 100%;
 }
 
-.special:hover {
-    background-color: rgb(201, 201, 201);
-    font-size: 21px;
+#projectSection {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#projectSectionTitle {
+    margin-top: 40px;
+    margin-bottom: 0px;
+    width: 100%;
+    font-family: 'Overpass Mono', monospace;
+    font-size: 23px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+#projectContainer {
+    width: 100%;
+}
+
+#projectButtonContainer {
+    width: 100%;
+    font-size: 15px;
+    transition: background-color 0.5s, font-size 0.5s;
+    
+}
+#projectButtonContainer:hover {
     cursor: pointer;
+    font-size: 18px;
+    background-color: rgb(201, 201, 201);
+}
+
+#newProjectButton {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+#newProjectButtonText {
+    font-family: 'Overpass Mono', monospace;
+    padding-left: 10px;
+    margin: 0 0 0 0;
+    width: 100%;
+}
+
+#projectButtonForm {
+}
+
+#projectButtonFormInput {
+    height: 60px;
+    width: 100%;
+    background-color: #dfdfdf;
+    box-sizing:border-box;
+    border: none;
+    padding: 10px;
+}
+
+.project {
+    width: 100%;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.5s;
+}
+
+.project:hover {
+    background-color: rgb(201, 201, 201);
+    cursor: pointer;
+}
+
+.projectName {
+    font-family: 'Overpass Mono', monospace;
+    font-size: 18px;
+    padding-left: 10px;
 }
 
 #taskTab {

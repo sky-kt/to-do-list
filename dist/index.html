@@ -2,13 +2,12 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css">
+        <title>To Do List</title>
 
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/brands.js"></script>
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/solid.js"></script>
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/fontawesome.js"></script>
         <script defer src="../node_modules/@fortawesome/fontawesome-free/js/regular.js"></script>
-
-        <title>To Do List</title>
     </head>
 
     <body>
@@ -19,7 +18,8 @@
             </header>
             <div id="tabs">
                 <div id="projectTab">
-                    <div id="specialContainer">
+                    <div id="specialSection">
+                        <p id="specialSectionTitle">General</p>
                         <div class="special" id="inbox">
                             <i class="fas fa-inbox specialIcon"></i>
                             <p>Inbox</p>
@@ -33,38 +33,26 @@
                             <p>This Week</p>
                         </div>
                     </div>
-                    <div id="projectContainer">
-                        <!-- <div class="project">Work</div>
-                        <div class="project">School</div>
-                        <div class="project">Chores</div> -->
+                    <div id="projectSection">
+                        <p id="projectSectionTitle">Projects</p>
+                        <div id="projectContainer">
+                            <!-- <div class="project">Work</div>
+                            <div class="project">School</div>
+                            <div class="project">Chores</div> -->
+                        </div>
+                        <div id="projectButtonContainer">
+                            <div id='newProjectButton'>
+                                <p id="newProjectText">+ New Project</p>
+                            </div>
+                            <form id="projectButtonForm">
+                                <input id="projectButtonFormInput"></input>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <div id="taskTab">
                     <h2 id="taskTabTitle">Inbox</h2>
                     <div id="taskContainer">
-                        <!-- <div class="task">
-                            <div class="taskStatus">
-                                <div class="done">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <p class="taskText">Feed dog</p>
-                            </div>
-                            <div class="taskDate">Date</div>
-                        </div> -->
-                        <!-- <div class="task">
-                            <div class="taskStatus">
-                                <div class="notDone">
-                                    <i class="far fa-circle"></i>
-                                </div>
-                                <div class="taskTextContainer">
-                                    <p class="taskText">Do dishes</p>
-                                </div>
-                            </div>
-                            <div class="taskDate">
-                                <label for="dueDate"><label>
-                                <input type="date" class="dueDate" name="duedate"> 
-                            </div>
-                        </div>  -->
                     </div>
                     <div id="buttonContainer"></div>
                 </div>

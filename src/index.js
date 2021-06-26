@@ -1,4 +1,6 @@
 import { button } from "./button.js"
+import { projectButton } from "./projectButton.js"
+import { projectFunctions } from "./projectFunctions"
 import { status } from "./status.js"
 import { taskFunctions } from "./taskFunctions.js"
 import { date } from "./date"
@@ -24,7 +26,12 @@ let activateForm = () => {
     let buttonFormInput = document.getElementById('buttonFormInput')
     buttonForm.addEventListener('submit', () => {
         let newTaskInfo = buttonFormInput.value
-        taskFunctions.construct(newTaskInfo)
+        if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
+            taskFunctions.construct(newTaskInfo)
+        }
+        else { 
+            projectFunctions.construct(newTaskInfo)
+        }
         loadCorrectTasks()
         status.init()
         date.init()
@@ -37,6 +44,35 @@ let activateForm = () => {
     })
 }
 
+let activateProjectButton = () => {
+    let newProjectButton = document.getElementById('newProjectButton')
+    newProjectButton.addEventListener('click', () => {
+        projectButton.makeForm()
+        activateProjectForm()
+    })
+} 
+
+let activateProjectForm = () => {
+    let projectButtonForm = document.getElementById('projectButtonForm')
+    let projectButtonFormInput = document.getElementById('projectButtonFormInput')
+
+    projectButtonForm.addEventListener('submit', () => {
+        let projectName = projectButtonFormInput.value
+        projectFunctions.makeProject(projectName)
+        projectFunctions.loadProjectNames()
+
+        //on click change project
+        projectFunctions.init()
+
+        projectButton.makeButton()
+        activateProjectButton()
+    })
+    projectButtonForm.addEventListener('focusout', () => {
+        projectButton.makeButton()
+        activateProjectButton()
+    })
+}
+
 let loadCorrectTasks = () => {
     if(tasksToLoad === "inbox") {
         taskFunctions.loadInbox()
@@ -46,6 +82,10 @@ let loadCorrectTasks = () => {
     }
     else if(tasksToLoad === "week") {
         taskFunctions.loadWeek()
+    }
+    else {
+        console.log('desiredtask array & project list')
+        projectFunctions.load()
     }
 }
 
@@ -84,3 +124,5 @@ week.addEventListener("click", () => {
 
 button.makeButton()
 activateButton()
+projectButton.makeButton()
+activateProjectButton()

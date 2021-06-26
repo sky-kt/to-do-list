@@ -60,6 +60,7 @@ let taskFunctions = (() => {
 
     let load = (activeTasks) => {
         let taskContainer = document.getElementById('taskContainer')
+        console.log('active tasks >>>>', activeTasks)
         removeAllChildren(taskContainer)
 
         for(let indivTask in activeTasks) {
@@ -76,6 +77,7 @@ let taskFunctions = (() => {
             let taskText = document.createElement('p')
             taskText.classList.add('taskText')
             let taskTextNode = document.createTextNode(activeTasks[indivTask][0])
+            console.log(taskTextNode)
             let taskDate = document.createElement('form')
             taskDate.classList.add('taskDate')
             let dateLabel = document.createElement('label')
@@ -101,6 +103,7 @@ let taskFunctions = (() => {
             task.appendChild(taskDate)
             taskContainer.appendChild(task)
         }
+        console.log('loaded')
     }
 
     let makeEditable = (taskTextContainer) => {
@@ -156,7 +159,7 @@ let taskFunctions = (() => {
             parent.removeChild(parent.firstChild);
         }
     }
-    return { loadInbox, loadToday, loadWeek, construct, taskArray}
+    return { loadInbox, loadToday, loadWeek, load, construct, taskArray}
 })()
 
 export { taskFunctions }
