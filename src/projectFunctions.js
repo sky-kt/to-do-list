@@ -65,7 +65,7 @@ let projectFunctions = (() => {
         }
     }
 
-    return { makeProject, loadProjectNames, init, load, construct}
+    return { makeProject, loadProjectNames, init, load, construct, projectList}
 
 })()
 

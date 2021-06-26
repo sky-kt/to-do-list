@@ -1,4 +1,6 @@
 import { taskFunctions } from "./taskFunctions.js"
+import { tasksToLoad } from "./index.js"
+import { projectFunctions } from "./projectFunctions.js"
 
 let date = (() => {
     let init = () => {
@@ -7,7 +9,14 @@ let date = (() => {
             currentDueDate.addEventListener("change", () => {
                 let inputtedDate = currentDueDate.value
                 let taskToChangeDate = currentDueDate.parentNode.parentNode
-                let taskToChange = taskFunctions.taskArray[Array.from(taskToChangeDate.parentNode.children).indexOf(taskToChangeDate)]
+                let taskToChange
+                let desiredIndex = Array.from(taskToChangeDate.parentNode.children).indexOf(taskToChangeDate)
+                if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
+                    taskToChange = taskFunctions.taskArray[desiredIndex]
+                }
+                else {
+                    taskToChange = projectFunctions.projectList[tasksToLoad][desiredIndex]
+                }
                 if(taskToChange.length > 1) taskToChange.pop()
                 taskToChange.push(inputtedDate)
             })

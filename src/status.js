@@ -1,4 +1,6 @@
 import { taskFunctions } from "./taskFunctions.js"
+import { tasksToLoad } from "./index.js"
+import { projectFunctions } from "./projectFunctions.js"
 
 let status = (() => {
     //add ability to change icon on click
@@ -11,7 +13,13 @@ let status = (() => {
                 currentNotDone.prepend(done)
 
                 let taskToDelete = currentNotDone.parentNode.parentNode
-                taskFunctions.taskArray.splice(Array.from(taskToDelete.parentNode.children).indexOf(taskToDelete), 1)
+                if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
+                    taskFunctions.taskArray.splice(Array.from(taskToDelete.parentNode.children).indexOf(taskToDelete), 1)
+                }
+                else {
+                    delete projectFunctions.projectList[tasksToLoad]
+                }
+
                 taskToDelete.classList.add('fadingTask')
 
                 setTimeout(() => {
