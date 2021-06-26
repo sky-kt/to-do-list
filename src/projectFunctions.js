@@ -18,7 +18,9 @@ let projectFunctions = (() => {
     }
 
     let makeProject = (projectName) => {
-        projectList[projectName] = []
+        if(projectList[projectName]) {
+            alert('You cannot have duplicate projects!')
+        } else projectList[projectName] = []
     }
 
     let loadProjectNames = () => {
