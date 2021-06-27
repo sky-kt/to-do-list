@@ -15,6 +15,7 @@ let status = (() => {
                 let taskToDelete = currentNotDone.parentNode.parentNode
                 if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
                     taskFunctions.taskArray.splice(Array.from(taskToDelete.parentNode.children).indexOf(taskToDelete), 1)
+                    taskFunctions.saveArray()
                 }
                 else {
                     projectFunctions.projectList[tasksToLoad].splice(Array.from(taskToDelete.parentNode.children).indexOf(taskToDelete), 1)

@@ -98,31 +98,50 @@ let inbox = document.getElementById('inbox')
 let today = document.getElementById('today')
 let week = document.getElementById('week')
 
-inbox.addEventListener("click", () => {
+let loadInbox = () => {
     tasksToLoad = "inbox"
     loadCorrectTasks()
     status.init()
     date.init()
     setTitle('Inbox')
-})
+}
 
-today.addEventListener("click", () => {
+let loadToday = () => {
     tasksToLoad = "today"
     loadCorrectTasks()
     status.init()
     date.init()
     setTitle('Today')
-})
+}
 
-week.addEventListener("click", () => {
+let loadWeek = () => {
     tasksToLoad = "week"
     loadCorrectTasks()
     status.init()
     date.init()
     setTitle('This Week')
+}
+
+inbox.addEventListener("click", () => {
+    loadInbox()
 })
+
+today.addEventListener("click", () => {
+    loadToday()
+})
+
+week.addEventListener("click", () => {
+    loadWeek()
+})
+
+
+localStorage.removeItem('projectList')
+localStorage.removeItem('taskArray')
+
+loadInbox()
 
 button.makeButton()
 activateButton()
+
 projectButton.makeButton()
 activateProjectButton()

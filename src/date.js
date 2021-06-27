@@ -13,6 +13,7 @@ let date = (() => {
                 let desiredIndex = Array.from(taskToChangeDate.parentNode.children).indexOf(taskToChangeDate)
                 if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
                     taskToChange = taskFunctions.taskArray[desiredIndex]
+                    taskFunctions.saveArray()
                 }
                 else {
                     taskToChange = projectFunctions.projectList[tasksToLoad][desiredIndex]

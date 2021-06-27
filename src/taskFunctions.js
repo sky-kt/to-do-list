@@ -3,12 +3,24 @@ import { tasksToLoad } from "./index.js"
 let taskFunctions = (() => {
     let taskArray = []
 
+    let loadArray = () => {
+        if(localStorage.getItem("taskArray")) {
+            taskArray = JSON.parse(localStorage.getItem("taskArray"))
+        }
+    }
+
+    loadArray()
+
+    let saveArray = () => {
+        localStorage.setItem("taskArray", JSON.stringify(taskArray));
+    }
+
     let construct = (input) => {
         if(tasksToLoad === "today" || tasksToLoad === "week") { 
             taskArray.push([input, findDate()]) 
         }
         else { taskArray.push([input]) }
-        console.log('task array is', taskArray)
+        saveArray()
     }
 
     let findDate = () => {
@@ -139,6 +151,7 @@ let taskFunctions = (() => {
                 newTaskText.appendChild(newTaskTextNode)
                 taskTextContainer.appendChild(newTaskText)
                 makeEditable(taskTextContainer)
+                saveArray()
             })
             newTextForm.addEventListener("focusout", () => {
                 removeAllChildren(taskTextContainer)
@@ -159,7 +172,8 @@ let taskFunctions = (() => {
             parent.removeChild(parent.firstChild);
         }
     }
-    return { loadInbox, loadToday, loadWeek, load, construct, taskArray}
+    return { loadInbox, loadToday, loadWeek,
+        load, construct, taskArray, saveArray}
 })()
 
 export { taskFunctions }
