@@ -148,6 +148,21 @@ h1 {
     display: flex;
     align-items: center;
     transition: background-color 0.5s;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.trashContainer {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: black;
+    transition: color 0.25s, font-size 0.5s;
+    height: 100%;
+}
+
+.trashContainer:hover {
+    color: red;
+    font-size: 20px;
 }
 
 .project:hover {
@@ -192,6 +207,11 @@ h1 {
 }
             
 .fadingTask {
+    animation: fadeAnimation 0.5s forwards;
+    animation-timing-function: ease-in; 
+}
+
+.fadingProject {
     animation: fadeAnimation 0.5s forwards;
     animation-timing-function: ease-in; 
 }
