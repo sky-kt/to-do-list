@@ -140,6 +140,10 @@ localStorage.removeItem('taskArray')
 
 loadInbox()
 
+projectFunctions.loadProjectList()
+projectFunctions.loadProjectNames()
+projectFunctions.init()
+
 button.makeButton()
 activateButton()
 

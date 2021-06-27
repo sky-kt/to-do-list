@@ -8,8 +8,21 @@ let projectFunctions = (() => {
 
     }
 
+    let loadProjectList = () => {
+        if(localStorage.getItem("projectList")) {
+            projectList = JSON.parse(localStorage.getItem("projectList"))
+            console.log('taskarray detected!')
+        }
+    }
+    loadProjectList()
+
+    let saveProjectList = () => {
+        localStorage.setItem("projectList", JSON.stringify(projectList));
+    }
+
     let construct = (newTaskInfo) => {
         projectList[tasksToLoad].push([newTaskInfo])
+        saveProjectList()
     }
 
     let load = () => {
@@ -17,12 +30,14 @@ let projectFunctions = (() => {
         let desiredTaskArray = projectList[tasksToLoad]
         taskFunctions.load(desiredTaskArray)
         console.log(desiredTaskArray)
+        saveProjectList()
     }
 
     let makeProject = (projectName) => {
         if(projectList[projectName]) {
             alert('You cannot have duplicate projects!')
         } else projectList[projectName] = []
+        saveProjectList()
     }
 
     let loadProjectNames = () => {
@@ -43,12 +58,13 @@ let projectFunctions = (() => {
             let projectID = 'PROJ_' + projectNames[proj] 
             project.setAttribute('id', projectID)
         }
+        saveProjectList()
     }
 
     let init = () => {
         let projectNames = Object.keys(projectList)
         let taskTabTitle = document.getElementById('taskTabTitle')
-        let allProjects = document.querySelectorAll('.project').forEach((project) => {
+        document.querySelectorAll('.project').forEach((project) => {
             project.addEventListener("click", () => {
                 let taskContainer = document.getElementById('taskContainer')
                 removeAllChildren(taskContainer)
@@ -61,6 +77,7 @@ let projectFunctions = (() => {
                 status.init()
             })
         })
+        saveProjectList()
         console.log(projectList)
     }
 
@@ -70,7 +87,11 @@ let projectFunctions = (() => {
         }
     }
 
-    return { makeProject, loadProjectNames, init, load, construct, projectList}
+    return { 
+        makeProject, loadProjectNames, init, load, 
+        construct, projectList, loadProjectList, 
+        saveProjectList
+    }
 
 })()
 
