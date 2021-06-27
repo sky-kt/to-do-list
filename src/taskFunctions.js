@@ -146,28 +146,33 @@ let taskFunctions = (() => {
             taskTextContainer.appendChild(newTextForm)
 
             newTextForm.addEventListener("submit", () => {
+                if(newTextInput.value !== '') {
+                    let taskToChange = taskTextContainer.parentNode.parentNode
+                    let desiredIndex = Array.from(taskToChange.parentNode.children).indexOf(taskToChange)
 
-                let taskToChange = taskTextContainer.parentNode.parentNode
-                let desiredIndex = Array.from(taskToChange.parentNode.children).indexOf(taskToChange)
+                    if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
+                        taskArray[desiredIndex].shift()
+                        taskArray[desiredIndex].unshift(newTextInput.value)
+                    }
+                    else { 
+                        projectFunctions.projectList[tasksToLoad][desiredIndex].shift()
+                        projectFunctions.projectList[tasksToLoad][desiredIndex].unshift(newTextInput.value)
+                    }
 
-                if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
-                    taskArray[desiredIndex].shift()
-                    taskArray[desiredIndex].unshift(newTextInput.value)
+                    removeAllChildren(taskTextContainer)
+                    let newTaskText = document.createElement('p')
+                    newTaskText.classList.add('taskText')
+                    let newTaskTextNode = document.createTextNode(newTextInput.value)
+                    newTaskText.appendChild(newTaskTextNode)
+                    taskTextContainer.appendChild(newTaskText)
+                    makeEditable(taskTextContainer)
+                    saveArray()
+                    projectFunctions.saveProjectList()
+                } 
+                else {
+                    alert('You cannot create an empty task!')
+                    document.activeElement.blur();
                 }
-                else { 
-                    projectFunctions.projectList[tasksToLoad][desiredIndex].shift()
-                    projectFunctions.projectList[tasksToLoad][desiredIndex].unshift(newTextInput.value)
-                }
-
-                removeAllChildren(taskTextContainer)
-                let newTaskText = document.createElement('p')
-                newTaskText.classList.add('taskText')
-                let newTaskTextNode = document.createTextNode(newTextInput.value)
-                newTaskText.appendChild(newTaskTextNode)
-                taskTextContainer.appendChild(newTaskText)
-                makeEditable(taskTextContainer)
-                saveArray()
-                projectFunctions.saveProjectList()
             })
             newTextForm.addEventListener("focusout", () => {
                 removeAllChildren(taskTextContainer)
