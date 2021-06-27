@@ -4,6 +4,7 @@ let taskFunctions = (() => {
     let taskArray = []
 
     let loadArray = () => {
+        // localStorage.clear()
         if(localStorage.getItem("taskArray")) {
             taskArray = JSON.parse(localStorage.getItem("taskArray"))
         }

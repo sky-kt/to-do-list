@@ -19,6 +19,7 @@ let status = (() => {
                 }
                 else {
                     projectFunctions.projectList[tasksToLoad].splice(Array.from(taskToDelete.parentNode.children).indexOf(taskToDelete), 1)
+                    projectFunctions.saveProjectList()
                 }
 
                 taskToDelete.classList.add('fadingTask')

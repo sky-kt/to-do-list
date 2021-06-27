@@ -4,11 +4,10 @@ import { tasksToLoad } from "./index.js"
 import { taskFunctions } from "./taskFunctions.js"
 
 let projectFunctions = (() => {
-    let projectList = {
-
-    }
+    let projectList = {}
 
     let loadProjectList = () => {
+        // localStorage.clear()
         if(localStorage.getItem("projectList")) {
             projectList = JSON.parse(localStorage.getItem("projectList"))
             console.log('taskarray detected!')
@@ -37,7 +36,7 @@ let projectFunctions = (() => {
         if(projectList[projectName]) {
             alert('You cannot have duplicate projects!')
         } else projectList[projectName] = []
-        saveProjectList()
+        //maybe does not re init?
     }
 
     let loadProjectNames = () => {
@@ -57,15 +56,21 @@ let projectFunctions = (() => {
             projectContainer.appendChild(project)
             let projectID = 'PROJ_' + projectNames[proj] 
             project.setAttribute('id', projectID)
+            let trashContainer = document.createElement('div')
+            trashContainer.classList.add('class', 'trashContainer')
+            let trashIcon = document.createElement('i')
+            trashIcon.classList.add('fa', 'fa-trash-alt')
+            trashContainer.appendChild(trashIcon)
+            project.appendChild(trashContainer)
         }
         saveProjectList()
     }
 
     let init = () => {
-        let projectNames = Object.keys(projectList)
         let taskTabTitle = document.getElementById('taskTabTitle')
         document.querySelectorAll('.project').forEach((project) => {
             project.addEventListener("click", () => {
+                let projectNames = Object.keys(projectList)
                 let taskContainer = document.getElementById('taskContainer')
                 removeAllChildren(taskContainer)
                 let desiredIndex = Array.from(project.parentNode.children).indexOf(project)
@@ -77,7 +82,24 @@ let projectFunctions = (() => {
                 status.init()
             })
         })
-        saveProjectList()
+        document.querySelectorAll('.trashContainer').forEach((trash) => {
+            trash.addEventListener("click", (e) => {
+                e.stopPropagation()
+                let projectNames = Object.keys(projectList)
+                let projectToTrash = trash.parentElement
+                let desiredIndex = Array.from(projectToTrash.parentNode.children).indexOf(projectToTrash)
+                let projectDeleteName = projectNames[desiredIndex]
+                let projectContainer = document.getElementById('projectContainer')
+                delete projectList[projectDeleteName]
+                saveProjectList()
+
+                projectToTrash.classList.add('fadingProject')
+
+                setTimeout(() => {
+                    projectContainer.removeChild(projectToTrash)
+                }, 500)
+            })
+        })
         console.log(projectList)
     }
 
