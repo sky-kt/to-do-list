@@ -1,4 +1,5 @@
 import { tasksToLoad } from "./index.js"
+import { projectFunctions } from "./projectFunctions"
 
 let taskFunctions = (() => {
     let taskArray = []
@@ -17,7 +18,10 @@ let taskFunctions = (() => {
     }
 
     let construct = (input) => {
-        if(tasksToLoad === "today" || tasksToLoad === "week") { 
+        if(input === '') {
+            alert('You cannot create an empty task!')
+        }
+        else if(tasksToLoad === "today" || tasksToLoad === "week") { 
             taskArray.push([input, findDate()]) 
         }
         else { taskArray.push([input]) }
@@ -41,6 +45,7 @@ let taskFunctions = (() => {
 
     let loadInbox = () => {
         load(taskArray)
+        saveArray()
     }
 
     let loadToday = () => {
@@ -55,6 +60,7 @@ let taskFunctions = (() => {
         }
         console.log(desiredTasks)
         load(desiredTasks)
+        saveArray()
     }
 
     let loadWeek = () => { 
@@ -69,6 +75,7 @@ let taskFunctions = (() => {
             }
         }
         load(desiredTasks)
+        saveArray()
     }
 
     let load = (activeTasks) => {
@@ -116,7 +123,7 @@ let taskFunctions = (() => {
             task.appendChild(taskDate)
             taskContainer.appendChild(task)
         }
-        console.log('loaded')
+        saveArray()
     }
 
     let makeEditable = (taskTextContainer) => {
@@ -142,8 +149,15 @@ let taskFunctions = (() => {
 
                 let taskToChange = taskTextContainer.parentNode.parentNode
                 let desiredIndex = Array.from(taskToChange.parentNode.children).indexOf(taskToChange)
-                taskArray[desiredIndex].shift()
-                taskArray[desiredIndex].unshift(newTextInput.value)
+
+                if(tasksToLoad === 'inbox' || tasksToLoad === 'today' || tasksToLoad === 'week') {
+                    taskArray[desiredIndex].shift()
+                    taskArray[desiredIndex].unshift(newTextInput.value)
+                }
+                else { 
+                    projectFunctions.projectList[tasksToLoad][desiredIndex].shift()
+                    projectFunctions.projectList[tasksToLoad][desiredIndex].unshift(newTextInput.value)
+                }
 
                 removeAllChildren(taskTextContainer)
                 let newTaskText = document.createElement('p')
@@ -153,6 +167,7 @@ let taskFunctions = (() => {
                 taskTextContainer.appendChild(newTaskText)
                 makeEditable(taskTextContainer)
                 saveArray()
+                projectFunctions.saveProjectList()
             })
             newTextForm.addEventListener("focusout", () => {
                 removeAllChildren(taskTextContainer)
