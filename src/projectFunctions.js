@@ -1,3 +1,5 @@
+import { date } from "./date.js"
+import { status } from "./status"
 import { tasksToLoad } from "./index.js"
 import { taskFunctions } from "./taskFunctions.js"
 
@@ -55,8 +57,9 @@ let projectFunctions = (() => {
                 taskTabTitle.textContent = projectName 
                 tasksToLoad = project.id.slice(5)
                 load()
+                date.init()
+                status.init()
             })
-
         })
         console.log(projectList)
     }
